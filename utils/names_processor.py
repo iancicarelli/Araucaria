@@ -1,4 +1,4 @@
-from openpyxl import Workbook
+from openpyxl.utils import column_index_from_string
 from models.format import Format
 
 class NamesProcessor:
@@ -14,7 +14,7 @@ class NamesProcessor:
         try:
             # Convertir la columna inicial a índice (1 para A, 8 para H, etc.)
             print(f"Intentando obtener valores desde la fila {row_number}, columna {start_column}")
-            start_col_idx = self.sheet[start_column + str(row_number)].column
+            start_col_idx = column_index_from_string(start_column)
             max_col_idx = self.sheet.max_column
             # Extraer los valores desde la columna inicial hasta el final
             values = []
