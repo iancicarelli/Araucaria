@@ -56,22 +56,22 @@ class DataProcessor:
 
     def iterate_columns(self, id):
         
-        column_letters = ['H']  # Lista de columnas a procesar (puedes agregar más)
+        column_letters = ['H','I']  # Lista de columnas a procesar (puedes agregar más)
         all_formats = []
 
         for col_letter in column_letters:
             # Obtener los valores de la columna correspondiente
-            column_data = self.get_data_column(row_number=2, start_column=col_letter)
+            column_data = self.get_data_column(start_column=col_letter)
             print(f"Datos obtenidos de la columna {col_letter}: {column_data}")
             # Llamar a process_row para cada columna
             formats = self.process_row(id, column_data)
             all_formats.extend(formats)
-            print(f"Datos procesados para la columna {col_letter}: {formats}")
+            print(f"Datos procesados para la columna {col_letter}")
         
         return all_formats
 
-    #BUSCA EN UNA FILA
-    def get_data_column(self, row_number=3, start_column='I'):
+    #BUSCA EN UNA COLUMNA TODOS LOS VALORES
+    def get_data_column(self, row_number=3, start_column='H'):
         if not self.sheet:
             print("No se ha cargado ninguna hoja. Asegúrate de llamar a load_excel primero.")
             return []

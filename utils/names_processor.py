@@ -13,14 +13,12 @@ class NamesProcessor:
 
         try:
             # Convertir la columna inicial a índice (1 para A, 8 para H, etc.)
-            print(f"Intentando obtener valores desde la fila {row_number}, columna {start_column}")
             start_col_idx = column_index_from_string(start_column)
             max_col_idx = self.sheet.max_column
             # Extraer los valores desde la columna inicial hasta el final
             values = []
             for col_idx in range(start_col_idx, max_col_idx + 1):
                 value = self.sheet.cell(row=row_number, column=col_idx).value
-                print(f"Valor en la fila {row_number}, columna {col_idx}: {value}")
                 values.append(value)
 
             return values
@@ -57,7 +55,8 @@ class NamesProcessor:
                     for name in names:
                         if name.strip().upper() == excel_name.strip().upper():
                             return excel_id
-                return None
+                        
+            return None
                            
         except Exception as e:
             print(f"Error al mapear nombres a IDs: {e}")
