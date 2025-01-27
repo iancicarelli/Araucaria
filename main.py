@@ -25,11 +25,15 @@ if __name__ == "__main__":
     print("Nombres extraídos:")
     print(names)
 
+    #Encontrar coincidencias
+    name_process = ExcelProcessor(data_path)
+    name_process.read_excel()
+    data_sheet = name_process.get_sheet()
     # Mapear nombres a IDs
     ids = []
     for name in names:
-        id_names_processor = NamesProcessor(id_sheet)
-        id = id_names_processor.map_names_to_ids([name])
+        id_names_processor = NamesProcessor(data_sheet)
+        id = id_names_processor.map_names_to_ids(names)
         if id:
             ids.append(id)
 
