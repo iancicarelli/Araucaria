@@ -11,6 +11,7 @@ class DataProcessor:
     def process_row(self, id, column_data):
         try:
             formats = []
+            verified_data = self.verify_amount(column_data)
             # Obtener todos los códigos (columna B)
             codes = [
                 row[1] for row in self.sheet.iter_rows(
@@ -19,12 +20,12 @@ class DataProcessor:
             ]
         
             # Verificar que la cantidad de códigos y datos coincidan
-            if len(codes) != len(column_data):
+            if len(codes) != len(verified_data):
                 print("La cantidad de códigos no coincide con los datos obtenidos.")
                 return []
 
             # Asociar cada código con su respectivo valor
-            for code, value in zip(codes, column_data):
+            for code, value in zip(codes, verified_data):
                 if code is not None:  # Asegurarse de que el código no sea None
                     print(f"Asociando código {code} con valor {value}")
                     formats.append(self.create_format(code, value, id))
