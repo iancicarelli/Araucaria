@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from ttkthemes import ThemedTk
+from tkinter import ttk
 from utils.constructor import Constructor
 from utils.excel_processor import ExcelProcessor
 from utils.data_processor import DataProcessor
-from ttkthemes import ThemedTk
-from tkinter import ttk,tk
 
 
 class Menu:
@@ -12,69 +12,97 @@ class Menu:
         # Ventana principal con tema "Arc"
         self.root = ThemedTk(theme="arc")
         self.root.title("Pino")
-        self.root.geometry("500x500")
+        self.root.geometry("600x400")
         
-        # Cambiar el color de fondo de la barra superior
-        self.root.configure(bg="#00953A")
-
-        # Crear componentes de la interfaz
+        # Crear los widgets principales
         self.create_widgets()
         
     def create_widgets(self):
-        # Estilo general para los widgets
-        style = ttk.Style()
-        style.configure("TLabel", font=("Arial", 12), background="#00953A", foreground="white")
-        style.configure("TButton", font=("Arial", 10))
+        # Crear un Notebook para pestañas
+        self.notebook = ttk.Notebook(self.root)
+        self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        # Crear una pestaña principal para las entradas
+        self.input_frame = ttk.Frame(self.notebook, padding="20")
+        self.notebook.add(self.input_frame, text="Configuración")
+
+        # Variables para las rutas
+        self.file_path_var = tk.StringVar()
+        self.data_path_var = tk.StringVar()
+        self.output_dir_var = tk.StringVar()
+        self.output_name_var = tk.StringVar()
+
+        # Etiqueta principal
+        ttk.Label(
+            self.input_frame, text="Selección de directorios", font=("Arial", 16)
+        ).grid(row=0, column=0, columnspan=3, pady=10)
 
         # Selección del archivo de entrada
-        ttk.Label(self.root, text="Selecciona el archivo de entrada:").pack(pady=10)
-        self.file_entry = ttk.Entry(self.root, width=40)
-        self.file_entry.pack(pady=5)
-        ttk.Button(self.root, text="Buscar", command=self.select_file).pack(pady=5)
+        ttk.Label(self.input_frame, text="Archivo de entrada:").grid(
+            row=1, column=0, sticky="e", pady=5
+        )
+        ttk.Entry(self.input_frame, textvariable=self.file_path_var, width=40).grid(
+            row=1, column=1, padx=5, pady=5
+        )
+        ttk.Button(
+            self.input_frame, text="Buscar", command=self.select_file
+        ).grid(row=1, column=2, padx=5, pady=5)
 
         # Selección del archivo de datos
-        ttk.Label(self.root, text="Selecciona el archivo de datos:").pack(pady=10)
-        self.data_path_entry = ttk.Entry(self.root, width=40)
-        self.data_path_entry.pack(pady=5)
-        ttk.Button(self.root, text="Buscar", command=self.select_data_file).pack(pady=5)
-        
+        ttk.Label(self.input_frame, text="Archivo de datos:").grid(
+            row=2, column=0, sticky="e", pady=5
+        )
+        ttk.Entry(self.input_frame, textvariable=self.data_path_var, width=40).grid(
+            row=2, column=1, padx=5, pady=5
+        )
+        ttk.Button(
+            self.input_frame, text="Buscar", command=self.select_data_file
+        ).grid(row=2, column=2, padx=5, pady=5)
+
         # Selección del directorio de salida
-        ttk.Label(self.root, text="Selecciona el directorio de salida:").pack(pady=10)
-        self.output_dir_entry = ttk.Entry(self.root, width=40)
-        self.output_dir_entry.pack(pady=5)
-        ttk.Button(self.root, text="Seleccionar", command=self.select_directory).pack(pady=5)
+        ttk.Label(self.input_frame, text="Directorio de salida:").grid(
+            row=3, column=0, sticky="e", pady=5
+        )
+        ttk.Entry(self.input_frame, textvariable=self.output_dir_var, width=40).grid(
+            row=3, column=1, padx=5, pady=5
+        )
+        ttk.Button(
+            self.input_frame, text="Seleccionar", command=self.select_directory
+        ).grid(row=3, column=2, padx=5, pady=5)
 
         # Nombre del archivo de salida
-        ttk.Label(self.root, text="Nombre del archivo de salida:").pack(pady=10)
-        self.output_name_entry = ttk.Entry(self.root, width=40)
-        self.output_name_entry.pack(pady=5)
-        
+        ttk.Label(self.input_frame, text="Nombre del archivo de salida:").grid(
+            row=4, column=0, sticky="e", pady=5
+        )
+        ttk.Entry(self.input_frame, textvariable=self.output_name_var, width=40).grid(
+            row=4, column=1, padx=5, pady=5
+        )
+
         # Botón para ejecutar
-        ttk.Button(self.root, text="Ejecutar", command=self.run).pack(pady=20)
-        
+        ttk.Button(
+            self.input_frame, text="Ejecutar", command=self.run
+        ).grid(row=5, column=0, columnspan=3, pady=20)
+
     def select_file(self):
         file_path = filedialog.askopenfilename(filetypes=[("Archivos Excel", "*.xlsx")])
         if file_path:
-            self.file_entry.delete(0, tk.END)
-            self.file_entry.insert(0, file_path)
+            self.file_path_var.set(file_path)
 
     def select_data_file(self):
         data_path = filedialog.askopenfilename(filetypes=[("Archivos Excel", "*.xlsx")])
         if data_path:
-            self.data_path_entry.delete(0, tk.END)
-            self.data_path_entry.insert(0, data_path)
-        
+            self.data_path_var.set(data_path)
+
     def select_directory(self):
         directory = filedialog.askdirectory()
         if directory:
-            self.output_dir_entry.delete(0, tk.END)
-            self.output_dir_entry.insert(0, directory)
-        
+            self.output_dir_var.set(directory)
+
     def run(self):
-        file_path = self.file_entry.get()
-        data_path = self.data_path_entry.get()
-        output_dir = self.output_dir_entry.get()
-        output_name = self.output_name_entry.get()
+        file_path = self.file_path_var.get()
+        data_path = self.data_path_var.get()
+        output_dir = self.output_dir_var.get()
+        output_name = self.output_name_var.get()
         output_path = f"{output_dir}/{output_name}.xlsx"
 
         if not file_path or not data_path or not output_dir or not output_name:
@@ -109,6 +137,9 @@ class Menu:
             self.root.destroy()
         except Exception as e:
             messagebox.showerror("Error", f"Ocurrió un error: {e}")
-        
+
     def show(self):
         self.root.mainloop()
+        
+        
+  

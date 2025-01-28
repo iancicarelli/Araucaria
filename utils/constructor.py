@@ -64,6 +64,7 @@ class Constructor:
             raise ValueError("No se encontró ninguna columna con valor en la fila 2.")    
         
         column_letters = self.generate_column_letters_up_to(last_column_letter)
+        
         all_formats = []
 
         for col_letter in column_letters:
