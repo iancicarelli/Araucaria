@@ -1,4 +1,4 @@
-## Pino Data manager
+## Araucaria Data manager
 
 Pino DM es un programa diseñado para procesar y organizar datos desde dos archivos Excel (.xlsx).
 Su objetivo principal es generar un archivo de salida en un formato específico, a partir de datos extraídos de estos archivos.
