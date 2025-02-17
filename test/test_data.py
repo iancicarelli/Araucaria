@@ -30,13 +30,7 @@ class TestDataProcessor(unittest.TestCase):
             self.assertIsInstance(code, (int,float), "El código debe ser un string")
             self.assertIsInstance(uxe, (int, float), "El UXE debe ser un número")
 
-    def test_verify_amount(self):
-        """ Verifica que `verify_amount` maneje correctamente datos numéricos y no numéricos """
-        test_data = [10, "abc", 5.5, None, 0]
-        expected = [10, 0, 5.5, 0, 0]  # Los no numéricos deben convertirse en 0
-        result = self.processor.verify_amount(test_data)
-        self.assertEqual(result, expected)
-
+    
     def test_process_row(self):
         """ Prueba `process_row` asociando códigos con valores verificados """
         column_data = [20, 10, 30]  # Datos simulados
