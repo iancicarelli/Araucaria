@@ -11,7 +11,7 @@ class Menu:
     def __init__(self):
         # Ventana principal con tema "Arc"
         self.root = ThemedTk(theme="arc")
-        self.root.title("Pino")
+        self.root.title("Araucaria")
         self.root.geometry("600x400")
         
         # Crear los widgets principales
