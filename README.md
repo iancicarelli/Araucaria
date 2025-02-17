@@ -18,7 +18,7 @@ Su objetivo principal es generar un archivo de salida en un formato específico,
 ##### Asignación de IDs:
 * Para obtener el ID, se verifica si el dato de la fila 2 de cada columna (por ejemplo, H2, I2, J2, etc.) coincide con un dato presente en el segundo archivo Excel.
 
-![imagen](https://github.com/iancicarelli/Pino/blob/main/data/formatoEntrada.png)
+![imagen](https://github.com/iancicarelli/Araucaria/blob/main/data/formatoEntrada.png)
 
 ### Formato de Salida
 El formato de salida solicitado requiere tres elementos clave: CÓDIGO, CANTIDAD y ID. Al asociar los datos de los archivos de entrada, se produce una tabla de salida con el siguiente formato:
@@ -27,10 +27,10 @@ El formato de salida solicitado requiere tres elementos clave: CÓDIGO, CANTIDAD
 * CANTIDAD: La cantidad asociada a cada código.
 * ID: El ID correspondiente encontrado en el segundo archivo Excel.
 
-![imagen](https://github.com/iancicarelli/Pino/blob/main/data/Data.png)
+![imagen](https://github.com/iancicarelli/Araucaria/blob/main/data/Data.png)
 
 
-![imagen](https://github.com/iancicarelli/Pino/blob/main/data/salida.png)
+![imagen](https://github.com/iancicarelli/Araucaria/blob/main/data/salida.png)
 
 
 ### Interfaz Visual del Proyecto
@@ -40,4 +40,4 @@ El formato de salida solicitado requiere tres elementos clave: CÓDIGO, CANTIDAD
 
 La combinación de estas herramientas permite una interfaz amigable y funcional para el usuario, facilitando la selección de archivos y directorios, y el procesamiento de datos.
 
-![imagen](https://github.com/iancicarelli/Pino/blob/main/data/home.png)
+![imagen](https://github.com/iancicarelli/Araucaria/blob/main/data/home.png)
